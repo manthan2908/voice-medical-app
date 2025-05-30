@@ -1,226 +1,108 @@
-# voice-medical-app
-# 🧠 CybellaAI – AI-Powered Voice Therapy Assistant
 
-CybellaAI is a responsive, web-based therapy assistant that leverages facial emotion recognition and voice analysis to simulate empathetic conversations. Designed to provide emotional support, Cybella bridges AI, emotion detection, and mental wellness in one powerful tool.
+# Test-CybellaAI Frontend
 
-## 🌟 Features
-
-- 🎭 **Real-Time Facial Emotion Detection** (using `face-api.js`)
-- 🗣️ **Voice Transcription & Synthesis** via Web Speech API
-- 📊 **Combined Emotion Dashboard** from both face and voice
-- 🔊 **Text-to-Speech AI Responses**
-- 📱 Fully **Responsive UI** (Mobile + Desktop)
-- ⚡ Built with **React + Vite + TailwindCSS**
+This is the **frontend** portion of the CybellaAI project, built using **React + Vite**. It interfaces with the backend for real-time emotion detection using facial and voice data.
 
 ---
 
-## 🚀 Live Demo
+## Clone the Repository
 
-🔗 [GitHub Pages Deployment](https://Gajerarishi.github.io/Test-CybellaAI)
-
----
-
-## 🧑‍💻 Tech Stack
-
-| Frontend | Emotion Detection | Styling & UI | Build Tools |
-|----------|-------------------|---------------|-------------|
-| React    | face-api.js       | TailwindCSS, shadcn/ui | Vite, TypeScript |
-
----
-
-## Clone project into your computer
 ```bash
-git clone https://github.com/GajeraRishi/Test-CybellaAI.git
-cd Pro-CybellaAI
+git clone https://github.com/hartonoosu/Final-Cybella.git
+cd Final-Cybella
 ```
-## 📦 Installation
 
-Make sure you have **Node.js (v18+)** and **npm** installed.
+---
 
-Make sure you have *Python 3.11**
+## Prerequisites
 
-Go to https://www.python.org/downloads/release/python-3110/ and scroll down to download "Windows installer (64-bit)".
+Ensure you have the following installed:
 
-Go to https://nodejs.org/en/download and download Windows installer.
-Once downloaded, verify them by using 
+* **Node.js (v18 or above)**
+* **npm (Node Package Manager)**
+
+Download Node.js from: [https://nodejs.org/en/download](https://nodejs.org/en/download)
+
+After installation, verify in your terminal:
+
 ```bash
 node -v
 npm -v
 ```
 
-Then open your browser at [http://localhost:5173](http://localhost:5173)
+If the terminal does not recognize these commands, add Node.js to your system path:
 
----
-
-## 🗃️ Project Structure
-
-```bash
-├── public/                  # Public assets like model files
-├── src/
-│   ├── components/          # React UI Components
-│   ├── hooks/               # Custom React hooks
-│   ├── utils/               # Utility functions
-│   └── main.tsx            # Entry point
-├── index.html               # Root HTML
-├── package.json             # Dependencies and scripts
-├── tailwind.config.js       # Tailwind setup
-```
-
----
-
-## ✅ GitHub Pages Deployment Guide (for Vite Projects)
-
-### 🔧 Step 1: Update `Git Setup for Deployment` 
-
-If this is your first time setting up Git:
+1. Press `Windows + R`, type `sysdm.cpl`, and hit Enter.
+2. Go to the **Advanced** tab → Click **Environment Variables**.
+3. Under **System Variables**, find `Path` → Click **Edit**.
+4. Ensure this path is listed (add if missing):
 
 ```bash
-git init
-git remote remove origin 
-git remote add origin https://github.com/GajeraRishi/Test-Cybella.git
-git add .
-git commit -m "initial commit"
-git branch -M main
-git push -u origin main
+C:\Program Files\nodejs\
 ```
-
-### 🔧 Step 2: Update `package.json`
-
-Make sure your `package.json` has the correct `homepage` and deployment scripts.
-
-```json
-{
-  "homepage": "https://yourusername.github.io/repo-name/index.html",
-
-
-  "scripts": {
-    "postbuild": "rimraf dist/404.html && copyfiles -f -u 1 dist/index.html dist/404.html",
-    "predeploy": "npm run build && npm run postbuild",
-    "deploy": "npx gh-pages -d dist"
-  }
-}
-```
-
-Replace:
-- `yourusername` with your GitHub username
-- `repo-name` with your repository name
 
 ---
 
-### 🛠️ Step 3: Install required packages
+## Install Netlify CLI
+
+Netlify CLI is required to serve the frontend locally using the Vite dev server.
+
+Install it globally:
 
 ```bash
-npm install --save-dev gh-pages copyfiles rimraf
+npm install -g netlify-cli
 ```
 
----
-
-### ⚙️ Step 4: Configure `vite.config.ts`
-
-Update your `vite.config.ts` to include the `base` option:
-
-```ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  base: '/repo-name/', // Replace with your repo name
-  plugins: [react()],
-})
-```
-
-If you are deploying to a **custom domain** or from the root (not a subdirectory), update your `vite.config.ts` as follows:
-
-```ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  // Use "/" if deploying to root or a custom domain
-  base: "/",
-  server: {
-    host: "::",
-    port: 5173, // specific port for vite localhost
-  },
-  plugins: [
-    react(),
-    mode === "development" && componentTagger(), // Optional: development tagger
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return "vendor";
-          }
-        },
-      },
-    },
-    chunkSizeWarningLimit: 600,
-  },
-}));
-```
-
-This ensures assets are correctly served from the root of your domain or hosting environment.
-
----
-
-### 🚀 Step 5: Deploy to GitHub Pages
-
-1. Push your project to a public GitHub repository.
-2. Run the following command to deploy:
+Verify the installation:
 
 ```bash
-npm run deploy
-```
-
-GitHub Pages will now serve your site from:
-```
-https://yourusername.github.io/repo-name/index.html
+netlify --version
 ```
 
 ---
 
-## 🔒 Permissions Required
+## Run the Frontend Locally
 
-- **Microphone**
-- **Camera** (for facial analysis)
-> Ensure your deployment uses HTTPS (camera/mic will not work otherwise)
-
----
-
-## 🧪 Known Issues
-
-- Firefox may have limited Speech API support
-- Voice emotion detection is currently simulated
-- Webcam access may be blocked if served over HTTP
-
----
-
-
-## 🤝 Contributors 
-- Team CybellaAI – Developing, UI/UX, Research, Testing
-
----
-
-
-## 🧾 Alternative Manual Deployment
-
-If you encounter the error:
-```
-"remote.origin.url" is not defined
-```
-Use the manual deploy command:
+1. Open your terminal and navigate to the project root:
 
 ```bash
-npx gh-pages -d dist -r "https://github.com/yourusername/your-repo-name.git"
+cd Test-CybellaAI-main
+```
+
+2. Start the Netlify development server:
+
+```bash
+npx netlify dev
+```
+
+3. When prompted, select:
+
+```
+[Vite] 'npm run dev'
+```
+
+This will launch the frontend at a local development URL (typically `http://localhost:8888` or similar).
+
+---
+
+
+
+
+# Speech Emotion Detection
+
+Make sure you have *Python 3.11*
+
+Go to https://www.python.org/downloads/release/python-3110/ and scroll down to download "Windows installer (64-bit)".
+
+```bash
+python --version
+```
+
+Press "Windows Logo + R" and search ```bash sysdm.cpl```. Select Advanced on the bar and then select Environment Variable. In the System Variables, select Path and then click Edit. Now add the new path 
+
+```bash
+C:\Users\pmant\AppData\Local\Programs\Python\Python310\
+C:\Users\pmant\AppData\Local\Programs\Python\Python310\Scripts\
 ```
 
 Replace `"yourusername"` and `"your-repo-name"` accordingly.
